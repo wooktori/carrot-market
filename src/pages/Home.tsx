@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Search from "../components/Search";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const title_list = [
@@ -48,13 +49,16 @@ export default function Home() {
       </div>
       <Search />
       <div className="flex gap-4 items-center justify-center">
-        <div className="w-32 h-32 bg-gray-100 rounded-md flex flex-col justify-between p-3 hover:bg-gray-200">
+        <Link
+          to="/sell"
+          className="w-32 h-32 bg-gray-100 rounded-md flex flex-col justify-between p-3 hover:bg-gray-200"
+        >
           <img
             src="https://img.icons8.com/?size=100&id=otmekfRTbat2&format=png&color=ff6600"
             className="w-8"
           />
           중고거래
-        </div>
+        </Link>
         <div className="w-32 h-32 bg-gray-100 rounded-md flex flex-col justify-between p-3 hover:bg-gray-200">
           <img
             src="https://img.icons8.com/?size=100&id=Y652b9zUFUkl&format=png&color=ff9364"
