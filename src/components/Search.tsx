@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 const hotWords = [
   "에어컨",
@@ -20,17 +21,31 @@ const hotWords = [
   "전체 매물",
 ];
 
+interface PostData {
+  bname: string;
+}
+
 // 전역 상태로 관리해야할 값 : region, category
 export default function Search() {
+  const [region, setRegion] = useState("태전동");
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => setIsOpen(true);
+  const handleComplete = (data: PostData) => {
+    setRegion(data.bname);
+    setIsOpen(false);
+  };
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex items-center mb-2 w-full justify-center">
-        <button className="flex items-center px-2 py-3 mr-2 bg-black text-white text-sm rounded-full font-bold gap-0.5 hover:bg-gray-700 transition">
+        <button
+          className="flex items-center px-2 py-3 mr-2 bg-black text-white text-sm rounded-full font-bold gap-0.5 hover:bg-gray-700 transition"
+          onClick={handleClick}
+        >
           <img
             src="https://img.icons8.com/?size=100&id=7880&format=png&color=FFFFFF"
             className="w-6"
           />
-          <span>태전동</span>
+          <span>{region}</span>
           <img
             src="https://img.icons8.com/?size=100&id=60662&format=png&color=FFFFFF"
             className="w-5"
@@ -58,6 +73,20 @@ export default function Search() {
             />
           </button>
         </form>
+        {isOpen && (
+          <div className="fixed flex items-center justify-center z-50 inset-0">
+            <div
+              className=" absolute inset-0 bg-gray-500 opacity-50"
+              onClick={() => setIsOpen(false)}
+            />
+            <div className="relative bg-white p-4 rounded-lg w-full max-w-md h-[440px] z-50">
+              <DaumPostcodeEmbed
+                onComplete={handleComplete}
+                autoClose={false}
+              />
+            </div>
+          </div>
+        )}
       </div>
       <div className="overflow-x-auto no-scrollbar w-1/2">
         <div className="flex space-x-4 text-sm text-gray-500 ">
