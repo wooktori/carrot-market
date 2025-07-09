@@ -33,7 +33,7 @@ export default function Home() {
   }, [title_list.length]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 mt-20">
       <div className="flex items-center justify-center">
         <img
           src="https://img.icons8.com/?size=100&id=7880&format=png&color=000000"

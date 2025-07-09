@@ -5,3 +5,13 @@
   --color-brand-hover: #ff9364;
   --color-brand-dark: #e65200;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
