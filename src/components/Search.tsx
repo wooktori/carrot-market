@@ -1,5 +1,8 @@
 import { useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import { useDispatch, useSelector } from "react-redux";
+import { change } from "../store/region";
+import type { RootState } from "../store/store";
 
 const hotWords = [
   "에어컨",
@@ -27,12 +30,13 @@ interface PostData {
 
 // 전역 상태로 관리해야할 값 : region, category
 export default function Search() {
-  const [region, setRegion] = useState("태전동");
+  const dispatch = useDispatch();
+  const region = useSelector((state: RootState) => state.region.value);
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen(true);
   const handleComplete = (data: PostData) => {
-    setRegion(data.bname);
     setIsOpen(false);
+    dispatch(change(data.bname));
   };
   return (
     <div className="flex flex-col items-center justify-center">

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Search from "../components/Search";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 
 export default function Home() {
   const title_list = [
@@ -23,6 +25,7 @@ export default function Home() {
     "매산리",
   ];
   const [index, setIndex] = useState(0);
+  const region = useSelector((state: RootState) => state.region.value);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +43,7 @@ export default function Home() {
           className="w-10"
         />
         <span className="font-bold text-3xl">
-          태전동에서 {title_list[index]} 찾고 계신가요?
+          {region}에서 {title_list[index]} 찾고 계신가요?
         </span>
       </div>
       <Search />
